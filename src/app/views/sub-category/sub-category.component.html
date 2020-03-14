@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row">
+        <h3 style="color:orange">Product List</h3>
+<div class="card">
+        <div class="card-group">
+            
+                <div *ngFor="let product of products">
+
+                    <img src="{{product.photo}}">
+
+                    <div class="card-body">
+                        <h5 class="card-title">{{product.name}} {{product.price}}</h5>
+                        <p class="card-text">Fashion is part of the daily air and it changes all the time, with all the
+                            events. 
+                            </p>
+                        <a class="btn btn-primary" [routerLink]="['/cart', { id:product.id }]">ADD TO CART</a>
+                    </div>
+                </div>
+            
+        </div>
+    </div>
+    </div>
+</div>

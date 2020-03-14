@@ -1,0 +1,218 @@
+<div class="container ">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 style="color:orange">Orders</h2>
+      <table class="table  table-striped">
+        <tr>
+          <th>Id</th>
+
+          <th>Name</th>
+
+          <th>Quantity</th>
+
+          <th>Amount</th>
+        </tr>
+        <tr *ngFor="let item of items">
+          <td>{{item.product.id}}</td>
+          <td>{{item.product.name}}</td>
+          <td>{{item.quantity}}</td>
+          <td>{{item.product.price}}</td>
+        </tr>
+        <tr>
+          <td colspan="3">Total</td>
+          <td>{{total}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="table table-striped">
+        <form action="/action_page.php">
+          <h2 style="color:orange">Billing Address</h2>
+          <tr>
+            <div>
+              <td><label for="fname"><i class="fa fa-user"></i> Full Name</label></td>
+              <td><input type="text" id="fname" name="firstname" placeholder="Enter Name" [(ngModel)]="billing.fullName"
+                  required="required" minlength="6" #fnm="ngModel">
+                <div *ngIf="(fnm.touched||fnm.dirty)&& fnm.invalid">
+                  <small class="text-danger" *ngIf="fnm.errors.required">Can not be left blank</small>
+                  <small class="text-danger" *ngIf="fnm.errors.minlength">Can not be less than 6 a
+                    characters</small>
+                </div>
+              </td>
+            </div>
+          </tr>
+          <tr>
+            <div>
+              <td> <label for="email"><i class="fa fa-envelope"></i> Email</label></td>
+              <td><input type="text" id="email" name="email" placeholder="Enter Email" [(ngModel)]="billing.email"
+                  required="required" min="" #mail="ngModel">
+                <div *ngIf="(mail.touched||mail.dirty)&& mail.invalid">
+                  <small class="text-danger" *ngIf="mail.errors.required">Can not be left blank</small>
+                  <small class="text-danger" *ngIf="mail.errors.minlength">It should Contain @ Symbol</small>
+                </div>
+              </td>
+            </div>
+          </tr>
+          <tr>
+            <div>
+              <td> <label for="adr"><i class="fa fa-address-card-o"></i> Address</label></td>
+              <td><input type="text" id="adr" name="address" placeholder="Enter Address" [(ngModel)]="billing.address"
+                  required="required" minlength="5" #addr="ngModel">
+                <div *ngIf="(addr.touched||addr.dirty)&& addr.invalid">
+                  <small class="text-danger" *ngIf="addr.errors.required">Can not be left blank</small>
+                  <small class="text-danger" *ngIf="addr.errors.minlength">Can not be less than 5 a
+                    characters</small>
+                </div>
+              </td>
+            </div>
+          </tr>
+          <tr>
+            <div>
+              <td> <label for="city"><i class="fa fa-institution"></i> City</label></td>
+              <td> <input type="text" id="city" name="city" placeholder="Enter City" [(ngModel)]="billing.city"
+                  required="required" minlength="3" #cit="ngModel">
+                <div *ngIf="(cit.touched||cit.dirty)&& cit.invalid">
+                  <small class="text-danger" *ngIf="cit.errors.required">Can not be left blank</small>
+                  <small class="text-danger" *ngIf="cit.errors.minlength">Can not be less than 3 a
+                    characters</small>
+                </div>
+              </td>
+            </div>
+          </tr>
+          <tr>
+            <div>
+              <td> <label for="state">State</label></td>
+              <td> <input type="text" id="state" name="state" placeholder="Enter State" [(ngModel)]="billing.state"
+                  required="required" minlength="4" #stat="ngModel">
+                <div *ngIf="(stat.touched||stat.dirty)&& stat.invalid">
+                  <small class="text-danger" *ngIf="stat.errors.required">Can not be left blank</small>
+                  <small class="text-danger" *ngIf="stat.errors.minlength">Can not be less than 4 a
+                    characters</small>
+                </div>
+              </td>
+            </div>
+          </tr>
+          <tr>
+            <div>
+              <td> <label for="zip">Zip</label></td>
+              <td> <input type="text" id="zip" name="zip" placeholder="Enter Zip" [(ngModel)]="billing.zip"
+                  required="required" minlength="6" maxlength="6" #pin="ngModel">
+                <div *ngIf="(pin.touched||pin.dirty)&& pin.invalid">
+                  <small class="text-danger" *ngIf="pin.errors.required">Can not be left blank</small>
+                  <small class="text-danger" *ngIf="pin.errors.minlength">It Should be exactly 6
+                    characters</small>
+                </div>
+              </td>
+            </div>
+          </tr>
+        </form>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+
+
+      <div class="card card-outline-secondary">
+        <div class="card-body">
+          <h3 class="text-center" style="color:orange">Credit Card Payment</h3>
+          <hr>
+
+          <form class="form"  #myForm="ngForm" (ngSubmit)="save()"role="form">
+            <div class="icon-container">
+              <i class="fa fa-cc-visa" style="color:navy;"></i>
+              <i class="fa fa-cc-amex" style="color:blue;"></i>
+              <i class="fa fa-cc-mastercard" style="color:red;"></i>
+              <i class="fa fa-cc-discover" style="color:orange;"></i>
+            </div>
+            <div class="form-group">
+              <label for="cc_name">Card Holder's Name</label>
+              <input type="text" id="cname" class="form-control" name="cardname" required
+                placeholder="Enter Name As per Card" [(ngModel)]="pay.nameOnCard" [(ngModel)]="payment.nameOnCard"
+                required="required" minlength="6" maxlength="40" #name="ngModel">
+              <div *ngIf="(name.touched||name.dirty)&& name.invalid">
+                <small class="text-danger" *ngIf="name.errors.required">Can not be left blank</small>
+                <small class="text-danger" *ngIf="name.errors.minlength">Can not be less than 6 a
+                  characters</small>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Card Number</label>
+              <input type="number" id="ccnum" class="form-control" name="cardnumber"
+                placeholder="Enter Your Card Number" [(ngModel)]="pay.creditCardNumber"
+                [(ngModel)]="payment.creditCardNumber" required="required" min="16" maxlength="3" #card="ngModel" />
+              <div *ngIf="(card.touched||card.dirty)&& card.invalid">
+                <small class="text-danger" *ngIf="card.errors.required">Can not be left blank</small>
+                <small class="text-danger" *ngIf="card.errors.minlength">It should be only 16
+                  characters</small>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-12">Card Exp. Date</label>
+              <div class="col-md-4">
+                <select class="form-control" name="cc_exp_mo" size="0" [(ngModel)]="pay.expiryMonth"
+                  [(ngModel)]="payment.expiryMonth" required="required" minlength="1" maxlength="2" #mon="ngModel">
+                  <option value="01">01</option>
+                  <option value="02">02</option>
+                  <option value="03">03</option>
+                  <option value="04">04</option>
+                  <option value="05">05</option>
+                  <option value="06">06</option>
+                  <option value="07">07</option>
+                  <option value="08">08</option>
+                  <option value="09">09</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                </select>
+
+              </div>
+              <label class="col-md-12">Card Exp. Date</label>
+              <div class="col-md-4">
+               
+                <select class="form-control" name="cc_exp_yr" size="0" [(ngModel)]="pay.expiryYear"
+                  [(ngModel)]="payment.expiryYear" required="required" min="2" max="4">
+                  <option>2020</option>
+                  <option>2021</option>
+                  <option>2022</option>
+                  <option>2023</option>
+                  <option>2024</option>
+                  <option>2025</option>
+                  <option>2026</option>
+                  <option>2027</option>
+                  <option>2028</option>
+                  <option>2029</option>
+                  <option>2030</option>
+                </select>
+              </div>
+              <label for="cvv">CVV</label>
+              <div class="col-md-4">
+                <input type="password" class="form-control" autocomplete="off" maxlength="3" pattern="\d{3}"
+                  title="Three digits at back of your card" required="" placeholder="CVC">
+              </div>
+            </div>
+
+            <hr>
+            <div class="form-group row">
+              
+              <div class="col-md-6">
+             
+                
+               
+                
+                <button type="reset" class="btn btn-warning btn-lg btn-block">Cancel</button>
+              </div>
+              <div class="col-md-6">
+                <button type="submit" class="btn btn-warning btn-lg btn-block">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+
+      
+      </div>
+
+    

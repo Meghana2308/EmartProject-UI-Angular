@@ -1,0 +1,63 @@
+<div class="breacrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text">
+                    <a href="#"><i class="fa fa-home"></i> Home</a>
+                    <span>Register</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Form Section Begin -->
+
+<!-- Register Section Begin -->
+<div class="register-login-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+                <div class="register-form">
+                    <h2>Register</h2>
+                    <form #myForm="ngForm" (ngSubmit)="save()">
+                        <div class="group-input">
+                            <label for="username">Username or email address *</label>
+                            <input type="text" name="userName" [(ngModel)]="reg.userName" [(ngModel)]="signup.userName"
+                                required="required" minlength="4" #user="ngModel" />
+                            <div *ngIf="(user.touched||user.dirty)&& user.invalid">
+                                <small class="text-danger" *ngIf="user.errors.required">Can not be left blank</small>
+                                <small class="text-danger" *ngIf="user.errors.minlength">Can not be less than 4
+                                    characters</small>
+                            </div>
+                        </div>
+                        <div class="group-input">
+                            <label for="pass">Password *</label>
+                            <input type="password" name="password" [(ngModel)]="reg.password"
+                                [(ngModel)]="signup.password" required="required" minlength="6" #pass="ngModel" />
+                            <div *ngIf="(pass.touched||pass.dirty) && pass.invalid">
+                                <small class="text-danger" *ngIf="pass.errors.required">Can not be left blank</small>
+                                <small class="text-danger" *ngIf="pass.errors.minlength">Can not be less than 6
+                                    characters</small>
+                            </div>
+                        </div>
+                        <div class="group-input">
+                            <label for="con-pass">Role </label>
+                            <input type="text" name="role" [(ngModel)]="reg.role" [(ngModel)]="signup.role"
+                                required="required" minlength="4" #rol="ngModel" />
+                            <div *ngIf="(rol.touched||rol.dirty) && rol.invalid">
+                                <small class="text-danger" *ngIf="rol.errors.required">Can not be left blank</small>
+                                <small class="text-danger" *ngIf="rol.errors.minlength">Can not be less than 4
+                                    characters</small>
+                            </div>
+                        </div>
+                        <button type="submit" class="button site-btn register-btn">REGISTER</button>
+
+                    </form>
+                    <div class="switch-login">
+                        <button routerLink="/buyerlogin" class="or-login">Or Login</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

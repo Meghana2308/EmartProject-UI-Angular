@@ -1,0 +1,39 @@
+Create table Users(uId varchar(20) NOT NULL,uName varchar(20) NOT NULL,
+password varchar(20) NOT NULL,pNo varchar(20) NOT NULL,email varchar(20) NOT NULL,
+primary key(uId));
+
+Create table Sellers(sId varchar(10) NOT NULL,sName varchar(20) NOT NULL,
+brand varchar(20) NOT NULL,pId numeric(10) NOT NULL,password varchar(10) NOT NULL,
+pNo varchar(20) NOT NULL,
+PRIMARY KEY(sId),
+FOREIGN KEY(pId) References Products(pId));
+
+
+Create table Category(cId numeric(10) NOT NULL,cName varchar(20) NOT NULL,
+gstPer number(10) NOT NULL,
+PRIMARY KEY(cId));
+
+Create table SubCategory(sId numeric(10) NOT NULL,sName varchar(20) NOT NULL, 
+cId numeric(10) NOT NULL,
+PRIMARY KEY(sId),
+FOREIGN KEY(cId) References Category(cId));
+
+
+Create table Products(pId numeric(10) NOT NULL,pName varchar(20) NOT NULL,
+sId numeric(10) NOT NULL,descr varchar(20) NOT NULL,price numeric(20) NOT NULL,
+PRIMARY KEY(pId),
+FOREIGN KEY(sId) References SubCategory(sId));
+
+Create table Orders(oId numeric(10) NOT NULL,orderDate date NOT NULL,
+totalAmt numeric(20) NOT NULL, discoId varchar(20) NOT NULL,discoValue numeric(20) NOT NULL,
+PRIMARY KEY(oId));
+
+Create table Payments(payId numeric(20) NOT NULL,oId numeric(10) NOT NULL,payDate date NOT NULL,
+payMode varchar(20) NOT NULL,payAmt numeric(20) NOT NULL,
+PRIMARY KEY(payId),
+FOREIGN KEY(oId) References Orders(oId));
+
+Create table OrderDetails(oId numeric(10) NOT NULL, pId numeric(10) NOT NULL,
+qty varchar(20) NOT NULL, totalAmt numeric(20) NOT NULL,price numeric(20) NOT NULL,
+PRIMARY KEY(oId,pId));
+
